@@ -5,10 +5,18 @@ services:
       context: "../tic-tac-toe-client"
     ports:
       - "3000:3000"
-    links:
+    volumes:
+      - type: bind
+        source: "../tic-tac-toe-client/src"
+        target: "/app/src"
+    depends_on:
       - state
   state:
     build:
-      context: "../tic-tac-toe-web"
+      context: "../tic-tac-toe-state"
     ports:
       - "3001:3000"
+    volumes:
+      - type: bind
+        source: "../tic-tac-toe-state/src"
+        target: "/app/src"
